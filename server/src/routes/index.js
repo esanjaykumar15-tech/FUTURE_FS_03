@@ -26,6 +26,7 @@ export function buildRouter(db, { publicSubmissionLimiter, adminLimiter }) {
   // ---- admin (token + server-side role check on every route) ----
   const admin = Router();
   admin.use(adminLimiter, requireAdmin(db));
+  admin.get('/me', (req, res) => res.json({ data: { id: req.user.id, role: 'admin' } }));
   admin.get('/summary', summary.get);
   admin.get('/reservations', validate(s.reservationQuery, 'query'), reservations.list);
   admin.patch('/reservations/:id', id, validate(s.reservationPatch), reservations.updateStatus);

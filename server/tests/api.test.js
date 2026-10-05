@@ -147,6 +147,7 @@ describe('admin authorization', () => {
     ['delete', `/api/admin/menu/${UUID}`],
     ['get', '/api/admin/enquiries'],
     ['get', '/api/admin/summary'],
+    ['get', '/api/admin/me'],
   ];
   it.each(routes)('%s %s → 401 without token', async (m, url) => {
     const { app } = buildApp();
@@ -169,6 +170,12 @@ describe('admin authorization', () => {
 });
 
 describe('admin operations', () => {
+  it('GET /admin/me confirms the admin role server-side', async () => {
+    const { app } = buildApp();
+    const res = await request(app).get('/api/admin/me').set(auth(ADMIN_TOKEN));
+    expect(res.status).toBe(200);
+    expect(res.body.data.role).toBe('admin');
+  });
   const newItem = { name: 'Mocha', description: 'Choc', category: 'Hot Coffee', price: 4.756 };
   it('creates a menu item with rounded price', async () => {
     const { app, db } = buildApp({ menu_items: () => ({ data: [{ id: UUID, ...newItem }], error: null }) });
