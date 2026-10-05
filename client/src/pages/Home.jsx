@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Clock, MapPin } from 'lucide-react';
 import PhotoSlot from '../components/PhotoSlot.jsx';
 import MenuCard from '../components/MenuCard.jsx';
+import { Hero, Interior, galleryArt } from '../components/illustrations.jsx';
 import { Loading, ErrorState } from '../components/States.jsx';
 import { useMenu } from '../hooks/useMenu.js';
 import { useDocumentTitle } from '../hooks/useDocumentTitle.js';
@@ -26,7 +27,7 @@ export default function Home() {
             <Link to="/reservations" className="btn btn-secondary">Reserve a table</Link>
           </div>
         </div>
-        <PhotoSlot photo={business.photos[0]} label="Sample hero photo" className="mx-auto h-[26rem] w-full max-w-sm rounded-t-[999px] rounded-b-3xl border-4 border-caramel md:h-[30rem]" />
+        <PhotoSlot photo={business.photos[0]} art={Hero} label="Sample hero photo" className="mx-auto h-[26rem] w-full max-w-sm rounded-t-[999px] rounded-b-3xl border-4 border-caramel md:h-[30rem]" />
       </section>
 
       <section className="container-page py-12" aria-labelledby="featured-h">
@@ -43,7 +44,7 @@ export default function Home() {
       </section>
 
       <section className="container-page grid gap-10 py-12 md:grid-cols-2 md:items-center" aria-labelledby="about-h">
-        <PhotoSlot photo={business.photos[1]} label="Sample interior photo" className="h-72 w-full rounded-2xl" />
+        <PhotoSlot photo={business.photos[1]} art={Interior} label="Sample interior photo" className="h-72 w-full rounded-2xl" />
         <div>
           <h2 id="about-h" className="text-3xl font-semibold">Our story</h2>
           <p className="mt-4 text-lg leading-relaxed text-espresso/85">A neighborhood café built around good coffee, fresh baking and a table where you can stay a while.</p>
@@ -55,7 +56,7 @@ export default function Home() {
       <section className="container-page py-12" aria-labelledby="gallery-h">
         <h2 id="gallery-h" className="text-3xl font-semibold">Gallery</h2>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {[0, 1, 2, 3].map((n) => <PhotoSlot key={n} photo={business.photos[n + 2]} label="Sample photo" className="h-40 w-full rounded-2xl md:h-52" />)}
+          {[0, 1, 2, 3].map((n) => <PhotoSlot key={n} photo={business.photos[n + 2]} art={galleryArt[n]} className="h-40 w-full rounded-2xl md:h-52" />)}
         </div>
       </section>
 

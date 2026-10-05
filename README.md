@@ -84,7 +84,7 @@ Full steps are in [`supabase/README.md`](supabase/README.md). In short:
 
 ```bash
 npm run test:server    # 65 API tests (Supertest, mocked Supabase)
-npm run test:client    # 46 UI tests (Vitest + React Testing Library, mocked fetch/Supabase)
+npm run test:client    # 55 UI tests (Vitest + React Testing Library, mocked fetch/Supabase)
 npm run build          # production build of the client
 ```
 
@@ -115,7 +115,10 @@ Run this against your real Supabase project (locally, then again on the live dep
 
 1. Get the owner's written confirmation of name, address, phone, WhatsApp, hours, menu and prices. Do not publish anything you cannot verify.
 2. Edit the `VITE_BUSINESS_*` values (see `.env.example`). Opening hours, testimonials, offers and photos live in `client/src/config/business.js`.
-3. Photos: only add images the café owns or has licensed. Put them in `client/public/` and list them under `photos` (`{ src, alt }`); until then the site shows labeled placeholders.
+3. Images: the site ships with **original illustrations** (a latte, iced drink, teapot, croissant, cake slice, café interior), drawn in the brand palette in `client/src/components/illustrations.jsx`. They are artwork, not photos of the real café, and the menu pictures are per *category* (not per item), so they won't match every dish exactly. Replace them with real photos the café owns or has licensed:
+   - Put image files in `client/public/photos/` and list them in `photos` in `client/src/config/business.js` as `{ src: '/photos/name.jpg', alt: 'Describe the photo' }`. Slot 0 is the home hero, slot 1 is the interior (home "Our story" and the About page), slots 2 to 7 are the gallery. Any slot you fill replaces its illustration automatically; empty slots keep the illustration.
+   - Menu items: set an **Image link** on the item in the admin area. That photo replaces the category illustration for that item.
+   - Use optimized files (roughly under 300 KB each); photos are lazy-loaded.
 4. Testimonials: add only real quotes you have permission to publish. Leave the list empty otherwise.
 5. Replace the draft privacy notice (`client/src/pages/Privacy.jsx`) with text reviewed by the owner and, where required, a legal professional.
 6. Replace `YOUR-DOMAIN.example` in `client/public/sitemap.xml` and `robots.txt`.
@@ -167,11 +170,12 @@ Reservations are **requests**. There is no live table availability; the café co
 
 ## 11. Screenshots
 
-Captured from the production build in headless Chromium against a **stub API with sample data** (not a live deployment). The sandbox could not load Google Fonts, so headings appear in the fallback serif font. Replace these with captures of your live site.
+Captured from the production build in headless Chromium against a **stub API with sample data** (not a live deployment). The pictures are the built-in illustrations, not photos. The sandbox could not load Google Fonts, so headings appear in the fallback serif font. Replace these with captures of your live site.
 
 | | |
 |---|---|
 | ![Home, desktop](docs/screenshots/home-desktop.png) | ![Menu, desktop](docs/screenshots/menu-desktop.png) |
-| ![Home, mobile](docs/screenshots/home-mobile.png) | ![Reservation form, mobile](docs/screenshots/reserve-mobile.png) |
+| ![About and gallery, desktop](docs/screenshots/about-desktop.png) | ![Reservation form, mobile](docs/screenshots/reserve-mobile.png) |
+| ![Home, mobile](docs/screenshots/home-mobile.png) | |
 
 Admin screens have not been captured yet.

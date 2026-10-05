@@ -1,10 +1,11 @@
 import PhotoSlot from './PhotoSlot.jsx';
+import { categoryArt } from './illustrations.jsx';
 import { formatPrice } from '../config/business.js';
 
 export default function MenuCard({ item }) {
   return (
     <article className={`card overflow-hidden ${item.available ? '' : 'opacity-75'}`}>
-      <PhotoSlot photo={item.image_url ? { src: item.image_url, alt: item.name } : null} label="Sample photo" className="h-44 w-full" />
+      <PhotoSlot photo={item.image_url ? { src: item.image_url, alt: item.name } : null} art={categoryArt[item.category]} className="h-44 w-full" />
       <div className="p-5">
         <div className="flex items-start justify-between gap-3">
           <h3 className="text-xl font-semibold">{item.name}</h3>
