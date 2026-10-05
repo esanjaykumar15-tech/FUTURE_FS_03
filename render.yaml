@@ -1,0 +1,20 @@
+# Render Blueprint for the API. Secrets are entered in the dashboard (sync: false).
+services:
+  - type: web
+    name: brewspace-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_ORIGIN
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: BUSINESS_NAME
+        value: BrewSpace Café (Demo)
